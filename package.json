@@ -1,7 +1,24 @@
 {
-  "name": "my-storybook",
+  "name": "dd-my-storybook-components",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "license": "MIT",
+  "typings": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "homepage": "https://delgado-diego.com",
+  "repository": {
+    "url": "https://github.com/DiegoDelgado95/storybook-react",
+    "type": "git"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.0",
@@ -10,17 +27,19 @@
     "@types/node": "^16.11.27",
     "@types/react": "^18.0.5",
     "@types/react-dom": "^18.0.1",
-    "react": "^18.0.0",
+    "react": ">=16",
     "react-dom": "^18.0.0",
     "react-scripts": "5.0.1",
-    "typescript": "^4.6.3",
+    "typescript": ">=4.0.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "start-storybook -p 6006",
-    "build": "build-storybook",
+    "build": "npm run clean && tsc && npm run copy-file",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "clean": "rimraf dist/",
+    "copy-file": "copyfiles -u 1 src/**/*.css dist/"
   },
   "eslintConfig": {
     "extends": [
@@ -62,8 +81,23 @@
     "@storybook/preset-create-react-app": "^4.1.0",
     "@storybook/react": "^6.4.22",
     "@storybook/testing-library": "^0.0.9",
+    "copyfiles": "^2.4.1",
     "css-loader": "^6.7.1",
     "postcss": "^8.4.12",
+    "rimraf": "^3.0.2",
+    "semantic-release": "^19.0.2",
     "webpack": "^5.72.0"
-  }
+  },
+  "peerDependencies": {
+    "react": ">=16",
+    "typescript": ">=4.0.0"
+  },
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    "@semantic-release/github",
+    "@semantic-release/npm",
+    "@semantic-release/git"
+  ]
 }
